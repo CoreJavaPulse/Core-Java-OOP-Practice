@@ -1,3 +1,4 @@
+package employeeEncapsulation;
 import java.util.Scanner;
 
 public class EmployeeMain {
