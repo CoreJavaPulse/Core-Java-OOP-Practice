@@ -1,20 +1,6 @@
-# Eclipse files
-/.classpath
-/.project
-/.settings/
-
-# Build folders
-/bin/
-/out/
-
-# Mac OS
-.DS_Store
-
-# Windows
-Thumbs.db
-
-# Logs
-*.log
-
-# Temporary files
-*.tmp
+echo .classpath > .gitignore
+echo .project >> .gitignore
+echo .settings/ >> .gitignore
+echo bin/ >> .gitignore
+echo *.class >> .gitignore
+echo target/ >> .gitignore
