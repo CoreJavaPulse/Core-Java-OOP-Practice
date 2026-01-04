@@ -23,6 +23,7 @@ Tech Stack: Java | OOP | Arrays | CRUD | Console Applications
 
 Beginner:
 - Welcome Program
+- CMD Line Arguments
 - Basic Arithmetic & Area Calculations
 
 Intermediate:
@@ -53,6 +54,7 @@ Core-Java-Practice/
 │   ├── AreaApplication/
 │   ├── BasicArrayApplication/
 │   ├── ArrayOperations/
+│   ├── CMDLINEARGS/
 │   ├── LogicApplication/
 │   ├── EmployeeManagement/
 │   └── MatrixApplication/
