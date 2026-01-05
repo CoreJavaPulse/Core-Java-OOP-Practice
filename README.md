@@ -63,7 +63,7 @@ git clone https://github.com/CoreJavaPulse/Core-Java-OOP-Practice.git
 
 📧 **Email**: [hiteshmane5hm@gmail.com](mailto:hiteshmane5hm@gmail.com)  
 💻 **GitHub**: [CoreJavaPulse](https://github.com/CoreJavaPulse)  
-🌐 **LinkedIn:** [Hitesh Mane](https://linkedin.com/in/hitesh-mane-java)
 📍 **Location**: Pune, Maharashtra  
+🌐 **LinkedIn:** [Hitesh Mane](https://linkedin.com/in/hitesh-mane-java)
 
 
