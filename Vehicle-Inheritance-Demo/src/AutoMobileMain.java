@@ -3,50 +3,52 @@ import java.util.Scanner;
 public class AutoMobileMain {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		Scanner sc =new Scanner(System.in);
-		AutoMobile a = null;
-		Bike bike = null;
-		System.out.println("-------------------Main Menu-----------------");
-		System.out.println("1:Car\n2:Bike");
-		System.out.println("Enter Your Choice.");
-		int ch = sc.nextInt();
-		if(ch==1)
-		{
-			System.out.println("-------------------Car Menu-------------");
-			System.out.println("1:Maruti\n2:Toyota");
+		Scanner sc = new Scanner(System.in);
+		String overallContinue;
+		do {
+			System.out.println("-------------------Main Menu-----------------");
+			System.out.println("1:Car\n2:Bike");
 			System.out.println("Enter Your Choice.");
-			int ch1 = sc.nextInt();
-			if(ch1==1)
-			{
-				a = new Maruti();
-				display("Maruti", a);
-			}
-			else if(ch1 == 2)
-			{
-				a =new Toyota();
-				display("Toyota", a);
-			}
-		}
-		else if(ch==2)
-		{
-			System.out.println("-------------------Bike Menu-------------");
-			System.out.println("1:Hero Honda\n2:Tvs");
-			System.out.println("Enter Your Choice.");
-			int ch2 = sc.nextInt();
-			if(ch2==1)
-			{
-				bike = new HeroHonda();
-				display("Hero Honda",bike);
-			}
-			else if(ch2 == 2)
-			{
-				return;
+			int mainCh = sc.nextInt();
+
+			if (mainCh == 1) {
+				// Car Menu Loop
+				String carContinue;
+				do {
+					System.out.println("-------------------Car Menu-------------");
+					System.out.println("1:Maruti\n2:Toyota");
+					System.out.println("Enter Your Choice.");
+					int ch1 = sc.nextInt();
+					if (ch1 == 1) display("Maruti", new Maruti());
+					else if (ch1 == 2) display("Toyota", new Toyota());
+					System.out.println("Continue in Car Menu? (yes/no)");
+					carContinue = sc.next();
+				} while (carContinue.equalsIgnoreCase("yes"));
+			} 
+			else if (mainCh == 2) {
+				// Bike Menu Loop
+				String bikeContinue;
+				do {
+					System.out.println("-------------------Bike Menu-------------");
+					System.out.println("1:Hero Honda\n2:Tvs");
+					System.out.println("Enter Your Choice.");
+					int ch2 = sc.nextInt();
+					if (ch2 == 1) display("Hero Honda", new HeroHonda());
+					else if (ch2 == 2) {
+						// TODO: display("Tvs", new Tvs());
+						System.out.println("Tvs selected (implement class).");
+					}
+					System.out.println("Continue in Bike Menu? (yes/no)");
+					bikeContinue = sc.next();
+				} while (bikeContinue.equalsIgnoreCase("yes"));
 			}
 
-		}
-
+			System.out.println("Continue Overall? (yes/no)");
+			overallContinue = sc.next();
+		} while (overallContinue.equalsIgnoreCase("yes"));
+		sc.close();
 	}
+
 
 	public static void display(String str,AutoMobile a)
 	{
