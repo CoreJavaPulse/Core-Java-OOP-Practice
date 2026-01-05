@@ -38,9 +38,6 @@ Clone the repository:
    ```bash
    git clone https://github.com/CoreJavaPulse/Core-Java-OOP-Practice.git  
    1.cd Core-Java-OOP-Practice/Bank-Account-OOP-Demo
-   2.javac *.java
-   3.java BankMain
-
   ```
 ## 👨‍💻 Author
 **Hitesh Mane**  
