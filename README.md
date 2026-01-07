@@ -7,7 +7,7 @@
 | # | Project Name | Key Concepts | Main Class |
 |---|--------------|--------------|------------|
 | 1 | **SimpleBank Management** | Inheritance, Polymorphism, Savings/Current Accounts | `BankMain` |
-| 2 | **Customer Product System** | Composition, Address+Product relationship | `Customer` |
+| 2 | **Customer Product System** | Composition, Address+Product relationship | `ShopMain` |
 | 3 | **Employee Constructor Demo** | Constructor Overloading, Setter vs Constructor | `EmployeeMain` |
 | 4 | **Shape Area Calculator** | Abstract Classes, Runtime Polymorphism | `ShapeMain` |
 | 5 | **Product Inventory Demo** | Encapsulation, Dual Object Creation | `Shopmain` |

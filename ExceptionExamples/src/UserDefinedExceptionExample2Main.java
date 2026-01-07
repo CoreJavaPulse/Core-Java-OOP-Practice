@@ -34,13 +34,13 @@ public class UserDefinedExceptionExample2Main {
 				if(percentage<60)
 					throw new InvalidPercentageException();
 				System.out.println("Valid Profile.");
+				System.out.println("Welcome!");
 			} catch (InvalidAgeException | InvalidPercentageException e) {
 				// TODO Auto-generated catch block
 				System.out.println("Exception Is :"+e);
 				throw e;
 			}
-			
-			System.out.println("Welcome!");
+		
 	}
 
 }
