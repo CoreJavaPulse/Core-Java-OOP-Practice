@@ -14,7 +14,7 @@
 | 6 | **E-Shopping Bill Generator** | GST Billing, Array Handling, Business Logic | `ShopMain` |
 | 7 | **Java String Mastery** | StringBuffer/Builder, Parsing, Validation | `StringMethodsDemo` |
 | 8 | **AutoMobile Showroom** | Multiple Interface Inheritance, Nested Menus | `AutoMobileMain` |
-| 9 | **Rectangle Shape Interface** | Interface Implementation, Method Overriding | `Rectangle` |
+| 9 | **Rectangle Shape Interface** | Interface Implementation, Method Overriding | `ShapeMain` |
 | 10| **Inheritance Hierarchy** | Multi-level Inheritance, super keyword | `EmployeeMain` |
 
 ## 🎯 Mastered Java OOP Concepts (All Projects)
