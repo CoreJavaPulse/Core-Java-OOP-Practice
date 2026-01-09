@@ -6,11 +6,14 @@
 bin/
 target/
 
-# Eclipse files
-.project
-.classpath
+# Eclipse
 .settings/
+.classpath
+.project
 .metadata/
+bin/
+*.class
+
 *.launch
 .loadpath
 .recommenders/
