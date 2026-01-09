@@ -7,11 +7,16 @@ bin/
 target/
 
 # Eclipse
-.settings/
-.classpath
-.project
-.metadata/
-bin/
+**/.settings/
+**/.classpath
+**/.project
+**/bin/
+**/*.class
+
+# Logs/Temp
+*.log
+.DS_Store
+
 *.class
 <<<<<<< HEAD
 =======
