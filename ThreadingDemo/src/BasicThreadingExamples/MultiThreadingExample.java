@@ -1,3 +1,4 @@
+package BasicThreadingExamples;
 
 public class MultiThreadingExample extends Thread{
 	
