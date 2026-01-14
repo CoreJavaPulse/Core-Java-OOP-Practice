@@ -27,6 +27,7 @@ The projects in this repository focus on **core Java concepts**, not frameworks 
 ✔ Composition (Has-A relationship)
 ✔ Exception Handling
 ✔ String, StringBuilder & StringBuffer APIs
+✔ Collection FrameWork
 ✔ Menu-driven console applications
 
 ---
