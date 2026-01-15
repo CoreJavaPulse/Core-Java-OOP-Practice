@@ -1,6 +1,21 @@
-echo .classpath > .gitignore
-echo .project >> .gitignore
-echo .settings/ >> .gitignore
-echo bin/ >> .gitignore
-echo *.class >> .gitignore
-echo target/ >> .gitignore
+# Eclipse Project Files
+.settings/
+.project
+.classpath
+.metadata/
+
+# Compiled Java classes
+bin/
+*.class
+*.jar
+*.war
+
+# Logs and temp files
+*.log
+*.tmp
+*.bak
+target/
+
+# OS generated files
+.DS_Store
+Thumbs.db
