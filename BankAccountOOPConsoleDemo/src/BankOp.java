@@ -23,7 +23,7 @@ public class BankOp {
 		System.out.println("Enter Customer Pincode");
 		int custPincode = sc.nextInt();
 
-		Address addObj = new Address(city, state, custPincode);
+		Address addrObj = new Address(city, state, custPincode);
 		System.out.println("------------------Account Details------------------");
 		System.out.print("Enter Account Number: ");
 		int accNo = sc.nextInt();
@@ -46,7 +46,7 @@ public class BankOp {
 			acc = new Account(accNo, accbal, accType);
 		}
 
-		Customer custobj = new Customer(custId, custname, addObj, acc);
+		Customer custobj = new Customer(custId, custname, addrObj, acc);
 		custArr = Arrays.copyOf(custArr,cnt+1);
 		custArr[cnt]=custobj;
 		cnt++;
