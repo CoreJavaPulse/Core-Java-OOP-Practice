@@ -3,7 +3,7 @@ public class CurrentAcount extends Account {
 	
 	private String compName;
 
-	public CurrentAcount(int accNo, String ifscCode, double accbal, String accType, String compName) {
+	public CurrentAcount(int accNo, String ifscCode, double accbal, AccountType accType, String compName) {
 		super(accNo, ifscCode, accbal, accType);
 		this.compName = compName;
 	}
@@ -15,9 +15,6 @@ public class CurrentAcount extends Account {
 	public void setCompName(String compName) {
 		this.compName = compName;
 	}
-	
-	
-	
-	
 
+	
 }

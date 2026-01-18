@@ -24,15 +24,15 @@ public class BankServices {
 		System.out.println("Enter The Account Type(Savings/Current)");
 		String accType = sc.next();
 		if(accType.equalsIgnoreCase("savings")) {
-			System.out.print("Enter Interest Rate: ");
-			double rate = sc.nextDouble();
-			accobj = new SavingsAccount(accNo, ifsccode, accBal, accType, rate);
+		    System.out.print("Enter Interest Rate: ");
+		    double rate = sc.nextDouble();
+		    accobj = new SavingsAccount(accNo, ifsccode, accBal, AccountType.Savings, rate);
+		} else if(accType.equalsIgnoreCase("current")) {
+		    System.out.print("Enter Company Name: ");
+		    String company = sc.next();
+		    accobj = new CurrentAcount(accNo, ifsccode, accBal, AccountType.Current, company);
 		}
-		else if(accType.equalsIgnoreCase("current")) {
-			System.out.print("Enter Company Name: ");
-			String company = sc.next();
-			accobj = new CurrentAcount(accNo, ifsccode, accBal, accType, company);
-		}
+
 		System.out.println("Enter The Customers City.");
 		String city = sc.next();
 		System.out.println("Enter The Customers State.");

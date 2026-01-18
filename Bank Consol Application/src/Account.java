@@ -4,9 +4,9 @@ public class Account {
 	private int accNo;
 	private String ifscCode;
 	private double accbal;
-	private String accType;
+	private AccountType accType;
 	
-	public Account(int accNo, String ifscCode, double accbal, String accType) {
+	public Account(int accNo, String ifscCode, double accbal, AccountType accType) {
 		super();
 		this.accNo = accNo;
 		this.ifscCode = ifscCode;
@@ -38,11 +38,11 @@ public class Account {
 		this.accbal = accbal;
 	}
 
-	public String getAccType() {
+	public AccountType getAccType() {
 		return accType;
 	}
 
-	public void setAccType(String accType) {
+	public void setAccType(AccountType accType) {
 		this.accType = accType;
 	}
 	
