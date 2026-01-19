@@ -21,7 +21,7 @@ public class BankMain {
 				bankServicesobj.displayAllAccounts();
 				break;
 			case 3:
-				
+				bankServicesobj.searchAccount();;
 				break;
 			case 4:
 				break;
