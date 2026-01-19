@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -20,17 +19,18 @@ public class BankServices {
 		System.out.println("Enter The ifsc Code.");
 		String ifsccode = sc.next();
 		System.out.println("Enter The Initial Balance.");
-		double accBal = sc.nextDouble();
+		double balance = sc.nextDouble();
 		System.out.println("Enter The Account Type(Savings/Current)");
 		String accType = sc.next();
+		
 		if(accType.equalsIgnoreCase("savings")) {
 		    System.out.print("Enter Interest Rate: ");
 		    double rate = sc.nextDouble();
-		    accobj = new SavingsAccount(accNo, ifsccode, accBal, AccountType.Savings, rate);
+		    accobj = new SavingsAccount(accNo, ifsccode, balance, AccountType.Savings, rate);
 		} else if(accType.equalsIgnoreCase("current")) {
 		    System.out.print("Enter Company Name: ");
 		    String company = sc.next();
-		    accobj = new CurrentAcount(accNo, ifsccode, accBal, AccountType.Current, company);
+		    accobj = new CurrentAccount(accNo, ifsccode, balance, AccountType.Current, company);
 		}
 
 		System.out.println("Enter The Customers City.");
@@ -44,13 +44,25 @@ public class BankServices {
 		Customer customerobj = new Customer(custId, custName, accobj, addobj);
 		
 		custlist.add(customerobj);	
+		System.out.println("Account created for " + custName);
 	}
 	public void displayAllAccounts() {
-		for(Customer customer : custlist)
-		{
-			System.out.println(customer.getCustId());
-		}
-		
+	    if (custlist.isEmpty()) {
+	        System.out.println("No accounts found!");
+	        return;
+	    }
+	    
+	    System.out.println("\n=== ALL ACCOUNTS ===");
+	    System.out.println("ID | Name | Account Details | City");
+	    System.out.println("---------------------------------");
+	    
+	    for (Customer cust : custlist) {
+	        System.out.println(cust.getCustId() + " | " + 
+	                          cust.getCustName() + " | " + 
+	                          cust.getCustAcc().toString()+ " | " + 
+	                          cust.getCustAddr().toString());
+	    }
 	}
+
 	
 }

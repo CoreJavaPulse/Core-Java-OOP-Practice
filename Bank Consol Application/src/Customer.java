@@ -46,7 +46,11 @@ public class Customer {
 		this.custAddr = custAddr;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "ID:" + custId + " " + custName + 
+				" | " + custAcc + " | " + custAddr;
+	}	
 	
 	
 

@@ -3,14 +3,14 @@ public class Account {
 	
 	private int accNo;
 	private String ifscCode;
-	private double accbal;
+	private double balance;
 	private AccountType accType;
 	
-	public Account(int accNo, String ifscCode, double accbal, AccountType accType) {
+	public Account(int accNo, String ifscCode, double balance, AccountType accType) {
 		super();
 		this.accNo = accNo;
 		this.ifscCode = ifscCode;
-		this.accbal = accbal;
+		this.balance = balance;
 		this.accType = accType;
 	}
 
@@ -30,12 +30,13 @@ public class Account {
 		this.ifscCode = ifscCode;
 	}
 
-	public double getAccbal() {
-		return accbal;
+	public double getBalance() {
+		return balance;
 	}
 
-	public void setAccbal(double accbal) {
-		this.accbal = accbal;
+
+	public void setBalance(double accbal) {
+		this.balance = accbal;
 	}
 
 	public AccountType getAccType() {
@@ -45,7 +46,13 @@ public class Account {
 	public void setAccType(AccountType accType) {
 		this.accType = accType;
 	}
-	
-	
+	 @Override
+	    public String toString() {
+	        return "AccNo=" + accNo + 
+	               ", IFSC=" + ifscCode + 
+	               ", Bal=₹" + String.format("%.2f", balance) + 
+	               ", Type=" + accType;
+	    }
+
 	
 }
