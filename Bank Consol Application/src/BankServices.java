@@ -6,8 +6,8 @@ public class BankServices {
 
 	Scanner sc = new Scanner(System.in);
 	List<Customer> custlist = new ArrayList<Customer>();
-	Account accobj;
-	
+	BankAccount accobj;
+
 	public void addAccount() {
 
 		System.out.println("Enter Customer Id.");
@@ -173,20 +173,20 @@ public class BankServices {
 			System.out.println("No Customers!");
 			return;
 		}
-		
+
 		do {
 			System.out.print("Enter Customer ID: ");
 			int id = sc.nextInt();
 			sc.nextLine(); 
-		    Customer cust = findCustomerById(id);
-		    if (cust == null)
-		    { 
-		    	System.out.println("Customer not found!"); 
-		    	continue; 
-		    }
-		    else
-		    {
-		    	System.out.println("Account: " + cust.getCustAcc());	
+			Customer cust = findCustomerById(id);
+			if (cust == null)
+			{ 
+				System.out.println("Customer not found!"); 
+				continue; 
+			}
+			else
+			{
+				System.out.println("Account: " + cust.getCustAcc());	
 				System.out.println("1:Deposit\n2:Withdraw");
 				int ch=sc.nextInt();
 				switch(ch)
@@ -213,85 +213,94 @@ public class BankServices {
 					System.out.println("Invalid Choice!\nTransaction Failed!!! ");
 					return;
 				}
-		    }
-		    
+			}
+
 			System.out.println("Do you Want To Continue.\n Yes Or No");
 			str = sc.next();
 		}while(str.equalsIgnoreCase("yes"));
-		
+
 	}
 
 	private Customer findCustomerById(int id)
 	{
-	    for (Customer c : custlist) 
-	    	if (c.getCustId() == id)
-	    		return c;
-	    return null;
+		for (Customer c : custlist) 
+			if (c.getCustId() == id)
+				return c;
+		return null;
 	}
-	
+
 	public void updateAccount() {
-	    if (custlist.isEmpty()) 
-	    { 
-	    	System.out.println("No accounts!"); 
-	    	return; 
-	    }
-	    System.out.print("Enter Customer ID: ");
-	    int id = sc.nextInt();
-	    Customer cust = findCustomerById(id);
-	    if (cust == null) 
-	    { 
-	    	System.out.println("Not found!"); 
-	    	return; 
-	    }
-	    displayCustomerDetails(cust);
-	    System.out.println("Update: 1.Name 2.Address");
-	    int opt = sc.nextInt();
-	    switch (opt) {
-	        case 1:
-	            System.out.print("New name: ");
-	            sc.nextLine(); 
-	            cust.setCustName(sc.nextLine());
-	            break;
-	        case 2:
-	        	sc.nextLine(); 
-	            System.out.print("New city: "); 
-	            String city = sc.nextLine();
-	            System.out.print("New state: "); 
-	            String state = sc.nextLine();
-	            System.out.print("New pin: "); 
-	            int pin = sc.nextInt();
-	            cust.setCustAddr(new Address(city, state, pin));
-	            break;
-	    }
-	    System.out.println("Updated Customer Details!");
-	    displayCustomerDetails(cust);
+		if (custlist.isEmpty()) 
+		{ 
+			System.out.println("No accounts!"); 
+			return; 
+		}
+		System.out.print("Enter Customer ID: ");
+		int id = sc.nextInt();
+		Customer cust = findCustomerById(id);
+		if (cust == null) 
+		{ 
+			System.out.println("Not found!"); 
+			return; 
+		}
+		displayCustomerDetails(cust);
+		System.out.println("Update: 1.Name 2.Address");
+		int opt = sc.nextInt();
+		switch (opt) {
+		case 1:
+			System.out.print("New name: ");
+			sc.nextLine(); 
+			cust.setCustName(sc.nextLine());
+			break;
+		case 2:
+			sc.nextLine(); 
+			System.out.print("New city: "); 
+			String city = sc.nextLine();
+			System.out.print("New state: "); 
+			String state = sc.nextLine();
+			System.out.print("New pin: "); 
+			int pin = sc.nextInt();
+			cust.setCustAddr(new Address(city, state, pin));
+			break;
+		}
+		System.out.println("Updated Customer Details!");
+		displayCustomerDetails(cust);
 	}
 
 	public void deleteAccount() {
-	    if (custlist.isEmpty())
-	    { 
-	    	System.out.println("No accounts!"); 
-	    	return; 
-	    }
-	    System.out.print("Enter Customer ID: ");
-	    int id = sc.nextInt();
-	    Customer cust = findCustomerById(id);
-	    if (cust == null) 
-	    { 
-	    	System.out.println("Not found!"); 
-	    	return; 
-	    }
-	    displayCustomerDetails(cust);
-	    System.out.print("Confirm Delete (yes/no): ");
-	    sc.nextLine(); 
-	    if (sc.nextLine().equalsIgnoreCase("yes"))
-	    {
-	        custlist.remove(cust);
-	        System.out.println("Deleted successfully!");
-	    } 
-	    else 
-	    {
-	        System.out.println("Cancelled.");
-	    }
+		if (custlist.isEmpty())
+		{ 
+			System.out.println("No accounts!"); 
+			return; 
+		}
+		System.out.print("Enter Customer ID: ");
+		int id = sc.nextInt();
+		Customer cust = findCustomerById(id);
+		if (cust == null) 
+		{ 
+			System.out.println("Not found!"); 
+			return; 
+		}
+		displayCustomerDetails(cust);
+		System.out.print("Confirm Delete (yes/no): ");
+		sc.nextLine(); 
+		if (sc.nextLine().equalsIgnoreCase("yes"))
+		{
+			custlist.remove(cust);
+			System.out.println("Deleted successfully!");
+		} 
+		else 
+		{
+			System.out.println("Cancelled.");
+		}
+	}
+
+	public void addInterestToAllAccounts()
+	{
+		for(Customer cust : custlist) 
+		{
+			Account acc = (Account) cust.getCustAcc();  
+			acc.addInterestToBalance();  
+		}
 	}
 }

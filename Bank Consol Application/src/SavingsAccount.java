@@ -1,5 +1,5 @@
 
-public class SavingsAccount extends Account {
+public class SavingsAccount extends Account{
 	
 	private double interestRate;
 
@@ -20,5 +20,9 @@ public class SavingsAccount extends Account {
     public String toString() {
         return super.toString() + ", Rate=" + String.format("%.2f%%", interestRate);
     }
-	
+
+	@Override
+	public double calculateInterest() {
+		return getBalance() * (interestRate / 100) * (1/12.0);
+	}
 }

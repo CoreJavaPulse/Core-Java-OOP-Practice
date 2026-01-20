@@ -3,10 +3,10 @@ public class Customer {
 	
 	private int custId;
 	private String custName;
-	private Account custAcc;
+	private BankAccount custAcc;
 	private Address custAddr;
 	
-	public Customer(int custId, String custName, Account custAcc, Address custAddr) {
+	public Customer(int custId, String custName, BankAccount custAcc, Address custAddr) {
 		super();
 		this.custId = custId;
 		this.custName = custName;
@@ -30,11 +30,12 @@ public class Customer {
 		this.custName = custName;
 	}
 
-	public Account getCustAcc() {
+	
+	public BankAccount getCustAcc() {
 		return custAcc;
 	}
 
-	public void setCustAcc(Account custAcc) {
+	public void setCustAcc(BankAccount custAcc) {
 		this.custAcc = custAcc;
 	}
 

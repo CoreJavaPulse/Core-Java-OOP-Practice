@@ -20,4 +20,9 @@ public class CurrentAccount extends Account {
     public String toString() {
         return super.toString() + ", Company=" + compName;
     }
+
+	@Override
+	public double calculateInterest() {
+		return 0;
+	}
 }

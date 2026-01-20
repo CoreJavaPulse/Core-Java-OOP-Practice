@@ -1,5 +1,5 @@
 
-public class Account {
+public abstract class Account implements BankAccount{
 	
 	private int accNo;
 	private String ifscCode;
@@ -29,7 +29,8 @@ public class Account {
 	public void setIfscCode(String ifscCode) {
 		this.ifscCode = ifscCode;
 	}
-
+	
+	@Override
 	public double getBalance() {
 		return balance;
 	}
@@ -47,7 +48,8 @@ public class Account {
 		this.accType = accType;
 	}
 	
-	public boolean deposit(double amount)
+	 @Override
+	 	public boolean deposit(double amount)
 	{
 		if (amount <= 0)
 		{
@@ -58,7 +60,8 @@ public class Account {
 		return true;
 	}
 	
-	public boolean withdraw(double amount) {
+	 @Override
+	 	public boolean withdraw(double amount) {
 	    if (amount <= 0 || balance < amount) {
 	        System.out.println("Invalid withdrawal!");
 	        return false;
@@ -74,5 +77,12 @@ public class Account {
 	               ", IFSC=" + ifscCode + 
 	               ", Bal=₹" + String.format("%.2f", balance) + 
 	               ", Type=" + accType;
-	    }	
+	    }
+	 public abstract double calculateInterest();
+	 
+	 public final void addInterestToBalance() {
+	        double interest = calculateInterest();  // Calls SUBCLASS method!
+	        balance += interest;
+	        System.out.println("Interest added: ₹" + interest);
+	    }
 }
