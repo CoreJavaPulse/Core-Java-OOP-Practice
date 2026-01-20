@@ -7,6 +7,7 @@ public class BankServices {
 	Scanner sc = new Scanner(System.in);
 	List<Customer> custlist = new ArrayList<Customer>();
 	Account accobj;
+	
 	public void addAccount() {
 
 		System.out.println("Enter Customer Id.");
@@ -76,7 +77,6 @@ public class BankServices {
 		System.out.println("   ═══════════════════════════════════════════════");
 	}
 
-
 	public void searchAccount() {
 		String str = null;
 		if (custlist.isEmpty()) {
@@ -104,16 +104,16 @@ public class BankServices {
 				break;
 			default:
 				System.out.println("Invalid choice!");
-				return;
+				break;
 			}
 
 			System.out.println("Do You Want To Continue With Search.\nEnter Yes Or No.");
 			str = sc.next();
-		}while(str.equalsIgnoreCase("yes")||str.equalsIgnoreCase("yess"));
+		}while(str.equalsIgnoreCase("yes"));
 	}
 
 	private void searchByCustomerId() {
-		System.out.println("Enter The Customer Id You Want To Serach.");
+		System.out.println("Enter The Customer Id You Want To Search.");
 		int custId = sc.nextInt();
 		boolean found = false;
 
@@ -166,7 +166,132 @@ public class BankServices {
 
 	}
 
+	public void transaction() {
+		String str  = null;
+		Boolean flag = false;
+		if(custlist.isEmpty()) {
+			System.out.println("No Customers!");
+			return;
+		}
+		
+		do {
+			System.out.print("Enter Customer ID: ");
+			int id = sc.nextInt();
+			sc.nextLine(); 
+		    Customer cust = findCustomerById(id);
+		    if (cust == null)
+		    { 
+		    	System.out.println("Customer not found!"); 
+		    	continue; 
+		    }
+		    else
+		    {
+		    	System.out.println("Account: " + cust.getCustAcc());	
+				System.out.println("1:Deposit\n2:Withdraw");
+				int ch=sc.nextInt();
+				switch(ch)
+				{
+				case 1:
+					System.out.println("Enter The Amount To Be Deposited To Customer AccountNo :"+cust.getCustAcc().getAccNo());
+					double deposit = sc.nextDouble();
+					flag = cust.getCustAcc().deposit(deposit);
+					if(flag == true)
+						System.out.println("Transaction Successful\nAmount Deposited");
+					else
+						System.out.println("Transaction UnSuccessful\nPlease Try Later.");
+					break;
+				case 2:
+					System.out.println("Enter The Amount To Be WithDraw from Customer AccountNo :"+cust.getCustAcc().getAccNo());
+					double withdraw = sc.nextDouble();
+					flag=cust.getCustAcc().withdraw(withdraw);
+					if(flag == true)
+						System.out.println("Transaction Successful\nAmount Withdrawed");
+					else
+						System.out.println("Transaction UnSuccessful\nPlease Try Later.");
+					break;
+				default:
+					System.out.println("Invalid Choice!\nTransaction Failed!!! ");
+					return;
+				}
+		    }
+		    
+			System.out.println("Do you Want To Continue.\n Yes Or No");
+			str = sc.next();
+		}while(str.equalsIgnoreCase("yes"));
+		
+	}
 
+	private Customer findCustomerById(int id)
+	{
+	    for (Customer c : custlist) 
+	    	if (c.getCustId() == id)
+	    		return c;
+	    return null;
+	}
+	
+	public void updateAccount() {
+	    if (custlist.isEmpty()) 
+	    { 
+	    	System.out.println("No accounts!"); 
+	    	return; 
+	    }
+	    System.out.print("Enter Customer ID: ");
+	    int id = sc.nextInt();
+	    Customer cust = findCustomerById(id);
+	    if (cust == null) 
+	    { 
+	    	System.out.println("Not found!"); 
+	    	return; 
+	    }
+	    displayCustomerDetails(cust);
+	    System.out.println("Update: 1.Name 2.Address");
+	    int opt = sc.nextInt();
+	    switch (opt) {
+	        case 1:
+	            System.out.print("New name: ");
+	            sc.nextLine(); 
+	            cust.setCustName(sc.nextLine());
+	            break;
+	        case 2:
+	        	sc.nextLine(); 
+	            System.out.print("New city: "); 
+	            String city = sc.nextLine();
+	            System.out.print("New state: "); 
+	            String state = sc.nextLine();
+	            System.out.print("New pin: "); 
+	            int pin = sc.nextInt();
+	            cust.setCustAddr(new Address(city, state, pin));
+	            break;
+	    }
+	    System.out.println("Updated Customer Details!");
+	    displayCustomerDetails(cust);
+	}
 
-
+	public void deleteAccount() {
+	    if (custlist.isEmpty())
+	    { 
+	    	System.out.println("No accounts!"); 
+	    	return; 
+	    }
+	    System.out.print("Enter Customer ID: ");
+	    int id = sc.nextInt();
+	    Customer cust = findCustomerById(id);
+	    if (cust == null) 
+	    { 
+	    	System.out.println("Not found!"); 
+	    	return; 
+	    }
+	    displayCustomerDetails(cust);
+	    System.out.print("Confirm Delete (yes/no): ");
+	    sc.nextLine(); 
+	    if (sc.nextLine().equalsIgnoreCase("yes"))
+	    {
+	        custlist.remove(cust);
+	        System.out.println("Deleted successfully!");
+	    } 
+	    else 
+	    {
+	        System.out.println("Cancelled.");
+	    }
+	}
 }

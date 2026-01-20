@@ -10,7 +10,7 @@ public class BankMain {
 		{
 			System.out.println("---------------------Main Menu--------------------");
 			System.out.println("1:Add a Account.\n2:Display All Acounts Details.\n3:Search Account."
-					+ "\n4:Update The Account Details.\n5:Delete the Account.");
+					+ "\n4:Perform Transaction.\n5:Update The Account Details.\n6:Delete the Account.");
 			int ch = sc.nextInt();
 			switch(ch)
 			{
@@ -21,19 +21,24 @@ public class BankMain {
 				bankServicesobj.displayAllAccounts();
 				break;
 			case 3:
-				bankServicesobj.searchAccount();;
+				bankServicesobj.searchAccount();
 				break;
 			case 4:
+				bankServicesobj.transaction();
 				break;
 			case 5:
+				bankServicesobj.updateAccount();
+				break;
+			case 6:
+				bankServicesobj.deleteAccount();
 				break;
 			default:
-				System.out.println("Enter Valid Choice. (1-5)");
+				System.out.println("Enter Valid Choice. (1-6)");
 				break;
 			}
 			System.out.println("Do You Want To Continue.\nEnter Yes Or No.");
 			str = sc.next();
-		}while(str.equalsIgnoreCase("yes")||str.equalsIgnoreCase("yess"));
+		}while(str.equalsIgnoreCase("yes"));
 		sc.close();
 		System.out.println("--------------------Thank You--------------------");
 
