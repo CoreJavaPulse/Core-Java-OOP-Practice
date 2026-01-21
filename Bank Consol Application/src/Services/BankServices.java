@@ -1,4 +1,5 @@
 package Services;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -9,316 +10,283 @@ import Entity.BankAccount;
 import Entity.CurrentAccount;
 import Entity.Customer;
 import Entity.SavingsAccount;
+import bankExceptions.AccountNotFoundException;
 import bankExceptions.InsufficientFundsException;
 import bankExceptions.InvalidAmountException;
 import enums.AccountType;
 
 public class BankServices {
-
-	Scanner sc = new Scanner(System.in);
-	List<Customer> custlist = new ArrayList<Customer>();
-	BankAccount accobj;
-
-	public void addAccount() {
-
-		System.out.println("Enter Customer Id.");
-		int custId = sc.nextInt();
-		System.out.println("Enter Customer Name.");
-		String custName = sc.next();
-
-		System.out.println("Enter The Account Number.");
-		int accNo = sc.nextInt();
-		System.out.println("Enter The ifsc Code.");
-		String ifsccode = sc.next();
-		System.out.println("Enter The Initial Balance.");
-		double balance = sc.nextDouble();
-		System.out.println("Enter The Account Type(Savings/Current)");
-		String accType = sc.next();
-
-		if(accType.equalsIgnoreCase("savings")) {
-			System.out.print("Enter Interest Rate: ");
-			double rate = sc.nextDouble();
-			accobj = new SavingsAccount(accNo, ifsccode, balance, AccountType.Savings, rate);
-		} else if(accType.equalsIgnoreCase("current")) {
-			System.out.print("Enter Company Name: ");
-			String company = sc.next();
-			accobj = new CurrentAccount(accNo, ifsccode, balance, AccountType.Current, company);
-		}
-
-		System.out.println("Enter The Customers City.");
-		String city = sc.next();
-		System.out.println("Enter The Customers State.");
-		String state = sc.next();
-		System.out.println("Enter The Customers Pincode.");
-		int pincode = sc.nextInt();
-		Address addobj = new Address(city, state, pincode);
-
-		Customer customerobj = new Customer(custId, custName, accobj, addobj);
-
-		custlist.add(customerobj);	
-		System.out.println("Account created for " + custName);
-	}
-
-	public void displayAllAccounts() {
-		if (custlist.isEmpty()) {
-			System.out.println("No accounts found!");
-			return;
-		}
-
-		System.out.println("\n=== ALL ACCOUNTS ===");
-		System.out.println("ID | Name | Account Details | City");
-		System.out.println("---------------------------------");
-
-		for (Customer cust : custlist) {
-			System.out.println(cust.getCustId() + " | " + 
-					cust.getCustName() + " | " + 
-					cust.getCustAcc().toString()+ " | " + 
-					cust.getCustAddr().toString());
-		}
-	}
-
-	private void displayCustomerDetails(Customer cust) {
-		System.out.println("\n✅ ═══════════════════════════════════════════════");
-		System.out.println("         CUSTOMER DETAILS FOUND");
-		System.out.println("   ═══════════════════════════════════════════════");
-		System.out.printf("   ID     : %d%n", cust.getCustId());
-		System.out.printf("   Name   : %s%n", cust.getCustName());
-		System.out.printf("   Account: %s%n", cust.getCustAcc());
-		System.out.printf("   Address: %s%n", cust.getCustAddr());
-		System.out.println("   ═══════════════════════════════════════════════");
-	}
-
-	public void searchAccount() {
-		String str = null;
-		if (custlist.isEmpty()) {
-			System.out.println("No accounts found!");
-			return;
-		}
-		do
-		{
-			System.out.println("\nSEARCH BY:");
-			System.out.println("1. Customer ID");
-			System.out.println("2. Account Number"); 
-			System.out.println("3. Customer Name");
-			System.out.print("Choose (1-3): ");
-			int choice = sc.nextInt();
-			switch(choice) {
-			case 1:
-				searchByCustomerId();
-				break;
-			case 2:
-				searchByAccountNo();
-				break;
-			case 3:
-				sc.nextLine(); // Clear buffer
-				searchByName(); 
-				break;
-			default:
-				System.out.println("Invalid choice!");
-				break;
-			}
-
-			System.out.println("Do You Want To Continue With Search.\nEnter Yes Or No.");
-			str = sc.next();
-		}while(str.equalsIgnoreCase("yes"));
-	}
-
-	private void searchByCustomerId() {
-		System.out.println("Enter The Customer Id You Want To Search.");
-		int custId = sc.nextInt();
-		boolean found = false;
-
-		for(Customer customer : custlist)
-		{
-			if(customer.getCustId() == custId)
-			{
-				displayCustomerDetails(customer);
-				found = true;
-			}
-		}
-		if (!found) {
-			System.out.println("Customer ID not found!");
-		}
-	}
-
-	private void searchByAccountNo() {
-
-		System.out.println("Enter The Account Number You Want To Search.");
-		int accNo  = sc.nextInt();
-		boolean found = false;
-		for(Customer customer : custlist)
-		{
-			if(customer.getCustAcc().getAccNo() == accNo)
-			{
-				displayCustomerDetails(customer);
-				found = true;
-			}
-		}
-		if (!found) {
-			System.out.println("Account Number not found!");
-		}
-	}
-
-	private void searchByName() {
-		System.out.print("Enter name (partial OK): ");
-		String name = sc.nextLine().toLowerCase().trim();
-
-		boolean foundAny = false;
-		for (Customer cust : custlist) {
-			if (cust.getCustName().toLowerCase().contains(name)) {
-				displayCustomerDetails(cust);
-				foundAny = true;
-			}
-		}
-
-		if (!foundAny) {
-			System.out.println("No customers found with name: '" + name + "'");
-		}
-
-	}
-
-	public void transaction() {
-		String str  = null;
-		Boolean flag = false;
-		if(custlist.isEmpty()) {
-			System.out.println("No Customers!");
-			return;
-		}
-
-		do {
-			System.out.print("Enter Customer ID: ");
-			int id = sc.nextInt();
-			sc.nextLine(); 
-			Customer cust = findCustomerById(id);
-			if (cust == null)
-			{ 
-				System.out.println("Customer not found!"); 
-				continue; 
-			}
-			else
-			{
-				System.out.println("Account: " + cust.getCustAcc());	
-				System.out.println("1:Deposit\n2:Withdraw");
-				int ch=sc.nextInt();
-				switch(ch)
-				{
-				case 1: // Deposit
-				    System.out.print("Enter deposit amount: ₹");
-				    double depositAmt = sc.nextDouble();
-				    try {
-				        cust.getCustAcc().deposit(depositAmt);
-				        System.out.println("✅ Deposit successful");
-				    } catch (InvalidAmountException e) {
-				        System.out.println("❌ " + e.getMessage());
-				    }
-				    break;
-				    
-				case 2: // Withdraw
-				    System.out.print("Enter withdrawal amount: ₹");
-				    double withdrawAmt = sc.nextDouble();
-				    try {
-				        cust.getCustAcc().withdraw(withdrawAmt);
-				        System.out.println("✅ Withdrawal successful");
-				    }
-				    catch (InvalidAmountException e) {
-				        System.out.println("❌ " + e.getMessage());
-				    } 
-				    catch (InsufficientFundsException e) {
-				        System.out.println("❌ " + e.getMessage());
-				    }
-				    break;
-				default:
-					System.out.println("Invalid Choice!\nTransaction Failed!!! ");
-					return;
-				}
-			}
-
-			System.out.println("Do you Want To Continue.\n Yes Or No");
-			str = sc.next();
-		}while(str.equalsIgnoreCase("yes"));
-
-	}
-
-	private Customer findCustomerById(int id)
-	{
-		for (Customer c : custlist) 
-			if (c.getCustId() == id)
-				return c;
-		return null;
-	}
-
-	public void updateAccount() {
-		if (custlist.isEmpty()) 
-		{ 
-			System.out.println("No accounts!"); 
-			return; 
-		}
-		System.out.print("Enter Customer ID: ");
-		int id = sc.nextInt();
-		Customer cust = findCustomerById(id);
-		if (cust == null) 
-		{ 
-			System.out.println("Not found!"); 
-			return; 
-		}
-		displayCustomerDetails(cust);
-		System.out.println("Update: 1.Name 2.Address");
-		int opt = sc.nextInt();
-		switch (opt) {
-		case 1:
-			System.out.print("New name: ");
-			sc.nextLine(); 
-			cust.setCustName(sc.nextLine());
-			break;
-		case 2:
-			sc.nextLine(); 
-			System.out.print("New city: "); 
-			String city = sc.nextLine();
-			System.out.print("New state: "); 
-			String state = sc.nextLine();
-			System.out.print("New pin: "); 
-			int pin = sc.nextInt();
-			cust.setCustAddr(new Address(city, state, pin));
-			break;
-		}
-		System.out.println("Updated Customer Details!");
-		displayCustomerDetails(cust);
-	}
-
-	public void deleteAccount() {
-		if (custlist.isEmpty())
-		{ 
-			System.out.println("No accounts!"); 
-			return; 
-		}
-		System.out.print("Enter Customer ID: ");
-		int id = sc.nextInt();
-		Customer cust = findCustomerById(id);
-		if (cust == null) 
-		{ 
-			System.out.println("Not found!"); 
-			return; 
-		}
-		displayCustomerDetails(cust);
-		System.out.print("Confirm Delete (yes/no): ");
-		sc.nextLine(); 
-		if (sc.nextLine().equalsIgnoreCase("yes"))
-		{
-			custlist.remove(cust);
-			System.out.println("Deleted successfully!");
-		} 
-		else 
-		{
-			System.out.println("Cancelled.");
-		}
-	}
-
-	public void addInterestToAllAccounts()
-	{
-		for(Customer cust : custlist) 
-		{
-			Account acc = (Account) cust.getCustAcc();  
-			acc.addInterestToBalance();  
-		}
-	}
+    
+    // 1. Fields
+    private final Scanner sc;
+    private final List<Customer> custlist;
+    private BankAccount accobj;
+    
+    // 2. Constructor
+    public BankServices() {
+        this.sc = new Scanner(System.in);
+        this.custlist = new ArrayList<>();
+    }
+    
+    // 3. Core Banking Operations (Public)
+    public void addAccount() {
+        try {
+            int custId = getIntInput("Enter Customer ID: ");
+            String custName = getStringInput("Enter Customer Name: ");
+            
+            int accNo = getIntInput("Enter Account Number: ");
+            String ifscCode = getStringInput("Enter IFSC Code: ");
+            double balance = getDoubleInput("Enter Initial Balance: ₹");
+            String accType = getStringInput("Account Type (Savings/Current): ");
+            
+            BankAccount account = createAccount(accNo, ifscCode, balance, accType);
+            Address address = getAddressInput();
+            
+            Customer customer = new Customer(custId, custName, account, address);
+            custlist.add(customer);
+            System.out.println("✅ Account created for " + custName);
+            
+        } catch (Exception e) {
+            System.out.println("❌ Error creating account: " + e.getMessage());
+        }
+    }
+    
+    public void displayAllAccounts() {
+        if (custlist.isEmpty()) {
+            System.out.println("No accounts found!");
+            return;
+        }
+        
+        System.out.println("\n=== ALL ACCOUNTS ===");
+        System.out.println("ID | Name | Account Details | City");
+        System.out.println("-------------------------------------------------");
+        
+        for (Customer cust : custlist) {
+            System.out.printf("%-2d | %-12s | %-35s | %s%n", 
+                cust.getCustId(), cust.getCustName(), 
+                cust.getCustAcc(), cust.getCustAddr().getCity());
+        }
+    }
+    
+    public void transaction() {
+        if (custlist.isEmpty()) {
+            System.out.println("No Customers!");
+            return;
+        }
+        
+        String str;
+        do {
+            try {
+                int id = getIntInput("Enter Customer ID: ");
+                Customer cust = findCustomerById(id);
+                
+                System.out.println("\nAccount: " + cust.getCustAcc());
+                System.out.println("1:Deposit  2:Withdraw");
+                int choice = getIntInput("Choose (1-2): ");
+                
+                switch (choice) {
+                    case 1 -> performDeposit(cust);
+                    case 2 -> performWithdraw(cust);
+                    default -> System.out.println("Invalid choice!");
+                }
+            } catch (AccountNotFoundException e) {
+                System.out.println("❌ " + e.getMessage());
+            }
+            
+            str = getStringInput("Continue? (yes/no): ");
+        } while (str.equalsIgnoreCase("yes"));
+    }
+    
+    public void viewStatement() {
+        if (custlist.isEmpty()) {
+            System.out.println("No accounts!");
+            return;
+        }
+        
+        try {
+            int custId = getIntInput("Enter Customer ID: ");
+            Customer cust = findCustomerById(custId);
+            Account acc = (Account) cust.getCustAcc();
+            
+            String countStr = getStringInput("Last how many? (10/all): ");
+            int count = countStr.equalsIgnoreCase("all") ? 50 : Integer.parseInt(countStr);
+            acc.printStatement(count);
+        } catch (AccountNotFoundException e) {
+            System.out.println("❌ " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("❌ Invalid input!");
+        }
+    }
+    
+    public void updateAccount() {
+        if (custlist.isEmpty()) {
+            System.out.println("No accounts!");
+            return;
+        }
+        System.out.println("⚠️ Update feature disabled - immutable design");
+    }
+    
+    public void deleteAccount() {
+        if (custlist.isEmpty()) {
+            System.out.println("No accounts!");
+            return;
+        }
+        System.out.println("⚠️ Delete feature disabled - production safety");
+    }
+    
+    public void addInterestToAllAccounts() {
+        if (custlist.isEmpty()) {
+            System.out.println("No accounts!");
+            return;
+        }
+        
+        System.out.println("\n=== ADDING INTEREST TO ALL ACCOUNTS ===");
+        for (Customer cust : custlist) {
+            try {
+                Account acc = (Account) cust.getCustAcc();
+                acc.addInterestToBalance();
+            } catch (Exception e) {
+                System.out.println("Error adding interest: " + e.getMessage());
+            }
+        }
+    }
+    
+    // 4. Search Operations
+    public void searchAccount() {
+        if (custlist.isEmpty()) {
+            System.out.println("No accounts found!");
+            return;
+        }
+        
+        String continueSearch;
+        do {
+            System.out.println("\n🔍 SEARCH BY:");
+            System.out.println("1. Customer ID  2. Account Number  3. Name");
+            int choice = getIntInput("Choose (1-3): ");
+            
+            switch (choice) {
+                case 1 -> searchByCustomerId();
+                case 2 -> searchByAccountNo();
+                case 3 -> searchByName();
+                default -> System.out.println("Invalid choice!");
+            }
+            
+            continueSearch = getStringInput("Continue search? (yes/no): ");
+        } while (continueSearch.equalsIgnoreCase("yes"));
+    }
+    
+    // 5. Private Helper Methods
+    private Customer findCustomerById(int id) throws AccountNotFoundException {
+        for (Customer c : custlist) {
+            if (c.getCustId() == id) return c;
+        }
+        throw new AccountNotFoundException(id);
+    }
+    
+    private BankAccount createAccount(int accNo, String ifscCode, double balance, String accType) {
+        if (accType.equalsIgnoreCase("savings")) {
+            double rate = getDoubleInput("Enter Interest Rate (%): ");
+            return new SavingsAccount(accNo, ifscCode, balance, AccountType.SAVINGS, rate);
+        } else {
+            String company = getStringInput("Enter Company Name: ");
+            return new CurrentAccount(accNo, ifscCode, balance, AccountType.CURRENT, company);
+        }
+    }
+    
+    private Address getAddressInput() {
+        String city = getStringInput("Enter City: ");
+        String state = getStringInput("Enter State: ");
+        int pincode = getIntInput("Enter Pincode: ");
+        return new Address(city, state, pincode);
+    }
+    
+    private void performDeposit(Customer cust) {
+        try {
+            double amount = getDoubleInput("Enter deposit amount: ₹");
+            cust.getCustAcc().deposit(amount);
+            System.out.println("✅ Deposit successful");
+        } catch (InvalidAmountException e) {
+            System.out.println("❌ " + e.getMessage());
+        }
+    }
+    
+    private void performWithdraw(Customer cust) {
+        try {
+            double amount = getDoubleInput("Enter withdrawal amount: ₹");
+            cust.getCustAcc().withdraw(amount);
+            System.out.println("✅ Withdrawal successful");
+        } catch (InvalidAmountException | InsufficientFundsException e) {
+            System.out.println("❌ " + e.getMessage());
+        }
+    }
+    
+    private void searchByCustomerId() {
+        try {
+            int custId = getIntInput("Enter Customer ID: ");
+            Customer cust = findCustomerById(custId);
+            displayCustomerDetails(cust);
+        } catch (AccountNotFoundException e) {
+            System.out.println("❌ " + e.getMessage());
+        }
+    }
+    
+    private void searchByAccountNo() {
+        int accNo = getIntInput("Enter Account Number: ");
+        boolean found = false;
+        
+        for (Customer cust : custlist) {
+            if (cust.getCustAcc().getAccNo() == accNo) {
+                displayCustomerDetails(cust);
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            System.out.println("❌ Account Number not found!");
+        }
+    }
+    
+    private void searchByName() {
+        sc.nextLine(); // Clear buffer
+        String name = getStringInput("Enter name (partial OK): ").toLowerCase().trim();
+        
+        boolean foundAny = false;
+        for (Customer cust : custlist) {
+            if (cust.getCustName().toLowerCase().contains(name)) {
+                displayCustomerDetails(cust);
+                foundAny = true;
+            }
+        }
+        if (!foundAny) {
+            System.out.println("❌ No customers found with name: '" + name + "'");
+        }
+    }
+    
+    private void displayCustomerDetails(Customer cust) {
+        System.out.println("\n✅ ═══════════════════════════════════════════════");
+        System.out.println("         CUSTOMER DETAILS FOUND");
+        System.out.println("   ═══════════════════════════════════════════════");
+        System.out.printf("   ID     : %d%n", cust.getCustId());
+        System.out.printf("   Name   : %s%n", cust.getCustName());
+        System.out.printf("   Account: %s%n", cust.getCustAcc());
+        System.out.printf("   Address: %s%n", cust.getCustAddr());
+        System.out.println("   ═══════════════════════════════════════════════");
+    }
+    
+    // 6. Input Helper Methods
+    private int getIntInput(String prompt) {
+        System.out.print(prompt);
+        return sc.nextInt();
+    }
+    
+    private double getDoubleInput(String prompt) {
+        System.out.print(prompt);
+        return sc.nextDouble();
+    }
+    
+    private String getStringInput(String prompt) {
+        System.out.print(prompt);
+        sc.nextLine(); // Clear buffer
+        return sc.nextLine().trim();
+    }
 }
