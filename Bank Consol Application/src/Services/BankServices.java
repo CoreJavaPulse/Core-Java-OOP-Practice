@@ -1,6 +1,17 @@
+package Services;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import Entity.Account;
+import Entity.Address;
+import Entity.BankAccount;
+import Entity.CurrentAccount;
+import Entity.Customer;
+import Entity.SavingsAccount;
+import bankExceptions.InsufficientFundsException;
+import bankExceptions.InvalidAmountException;
+import enums.AccountType;
 
 public class BankServices {
 
@@ -191,24 +202,31 @@ public class BankServices {
 				int ch=sc.nextInt();
 				switch(ch)
 				{
-				case 1:
-					System.out.println("Enter The Amount To Be Deposited To Customer AccountNo :"+cust.getCustAcc().getAccNo());
-					double deposit = sc.nextDouble();
-					flag = cust.getCustAcc().deposit(deposit);
-					if(flag == true)
-						System.out.println("Transaction Successful\nAmount Deposited");
-					else
-						System.out.println("Transaction UnSuccessful\nPlease Try Later.");
-					break;
-				case 2:
-					System.out.println("Enter The Amount To Be WithDraw from Customer AccountNo :"+cust.getCustAcc().getAccNo());
-					double withdraw = sc.nextDouble();
-					flag=cust.getCustAcc().withdraw(withdraw);
-					if(flag == true)
-						System.out.println("Transaction Successful\nAmount Withdrawed");
-					else
-						System.out.println("Transaction UnSuccessful\nPlease Try Later.");
-					break;
+				case 1: // Deposit
+				    System.out.print("Enter deposit amount: ₹");
+				    double depositAmt = sc.nextDouble();
+				    try {
+				        cust.getCustAcc().deposit(depositAmt);
+				        System.out.println("✅ Deposit successful");
+				    } catch (InvalidAmountException e) {
+				        System.out.println("❌ " + e.getMessage());
+				    }
+				    break;
+				    
+				case 2: // Withdraw
+				    System.out.print("Enter withdrawal amount: ₹");
+				    double withdrawAmt = sc.nextDouble();
+				    try {
+				        cust.getCustAcc().withdraw(withdrawAmt);
+				        System.out.println("✅ Withdrawal successful");
+				    }
+				    catch (InvalidAmountException e) {
+				        System.out.println("❌ " + e.getMessage());
+				    } 
+				    catch (InsufficientFundsException e) {
+				        System.out.println("❌ " + e.getMessage());
+				    }
+				    break;
 				default:
 					System.out.println("Invalid Choice!\nTransaction Failed!!! ");
 					return;

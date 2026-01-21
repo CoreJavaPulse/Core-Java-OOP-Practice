@@ -1,3 +1,6 @@
+package Entity;
+
+import enums.AccountType;
 
 public class CurrentAccount extends Account {
 

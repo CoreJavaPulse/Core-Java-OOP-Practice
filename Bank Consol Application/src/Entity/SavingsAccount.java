@@ -1,3 +1,6 @@
+package Entity;
+
+import enums.AccountType;
 
 public class SavingsAccount extends Account{
 	
