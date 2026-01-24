@@ -74,6 +74,6 @@ git clone https://github.com/CoreJavaPulse/Core-Java-OOP-Practice.git
 ```  
 ## 👨‍💻 Author
 **Hitesh Mane**  
-Java Full Stack Developer | Pune, India  
+Java Backend Aspirant | Pune, India  
 📧 Email : hiteshmane5hm@gmail.com 
 💻 GitHub : https://github.com/CoreJavaPulse
