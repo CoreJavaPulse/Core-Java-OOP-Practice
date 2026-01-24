@@ -62,7 +62,7 @@ cd Core-Java-Practice
   
 ## 👨‍💻 Author
 **Hitesh Mane**  
-Java Full Stack Developer | Pune, India  
+Java Backend Aspirant | Core Java & OOP | Pune, India  
 📧 Email : hiteshmane5hm@gmail.com 
 💻 GitHub : https://github.com/CoreJavaPulse
 
