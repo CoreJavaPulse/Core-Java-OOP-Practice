@@ -33,6 +33,7 @@ Each project is intentionally named **based on the exact concept it implements**
 * Exception Handling
 * Strings (`String`, `StringBuilder`, `StringBuffer`)
 * Collections Framework
+* Threading And Multithreading
 * Menu-driven console applications
 
 ---
@@ -45,15 +46,18 @@ Core-Java-OOP-Practice
 ├── AbstractClassMethodOverridingDemo
 ├── AutomobileInterfacePolymorphismDemo
 ├── BankAccountOOPConsoleDemo
+├── CollectionFrameWorkDemos
+├── CoreJavaPractice
 ├── CustomerBillingSystemUsingComposition
 ├── CustomerProductAddressDemo
-├── EmployeeEncapsulationConstructorDemo
+├── EncapsulationConstructorDemo
 ├── ExceptionHandlingDemo
 ├── InheritanceAndSuperKeywordDemo
 ├── InterfacePolymorphismDemo
+├── LambdaExpressionAndFunctionalInterfaceDemo
 ├── MethodOverloadingStaticVarargsWrapperDemo
-├── ProductEncapsulationConstructorDemo
 ├── StringStringBuilderStringBufferDemo
+├── ThreadingDemo
 └── README.md
 ```
 
@@ -63,27 +67,42 @@ Each folder represents an **independent Core Java module** and can be imported i
 
 ## 📊 Projects Overview
 
-| #  | Project Folder                              | Primary Focus                           |
-| -- | ------------------------------------------- | --------------------------------------- |
-| 1  | `AbstractClassMethodOverridingDemo`         | Abstract classes and method overriding  |
-| 2  | `AutomobileInterfacePolymorphismDemo`       | Interface-based polymorphism            |
-| 3  | `BankAccountOOPConsoleDemo`                 | OOP modeling using a real-world example |
-| 4  | `CustomerBillingSystemUsingComposition`     | Composition (Has-A relationship)        |
-| 5  | `CustomerProductAddressDemo`                | Object relationships                    |
-| 6  | `EmployeeEncapsulationConstructorDemo`      | Encapsulation and constructors          |
-| 7  | `ExceptionHandlingDemo`                     | Exception flow and handling             |
-| 8  | `InheritanceAndSuperKeywordDemo`            | Inheritance and `super` keyword         |
-| 9  | `InterfacePolymorphismDemo`                 | Runtime polymorphism                    |
-| 10 | `MethodOverloadingStaticVarargsWrapperDemo` | Overloading, varargs, wrapper classes   |
-| 11 | `ProductEncapsulationConstructorDemo`       | Constructor-based domain modeling       |
-| 12 | `StringStringBuilderStringBufferDemo`       | String APIs and mutability              |
+### 🟢 Beginner Level – Core Java Fundamentals
+
+| # | Project Folder | Primary Focus |
+|---|----------------|---------------|
+| 1 | `CoreJavaPractice` |Core Java fundamentals including syntax, control flow, arrays (1D/2D), matrix operations, and command-line arguments |
+| 2 | `StringStringBuilderStringBufferDemo` | String immutability and mutable strings |
+| 3 | `EncapsulationConstructorDemo` | Encapsulation and constructors |
+| 4 | `MethodOverloadingStaticVarargsWrapperDemo` | Overloading, varargs, wrappers |
+| 5 | `ExceptionHandlingDemo` | Exception handling |
+
+### 🟡 Intermediate Level – Object-Oriented Programming
+
+| # | Project Folder | Primary Focus |
+|---|----------------|---------------|
+| 6 | `InheritanceAndSuperKeywordDemo` | Inheritance and `super` |
+| 7 | `AbstractClassMethodOverridingDemo` | Abstract classes & overriding |
+| 8 | `InterfacePolymorphismDemo` | Interface-based polymorphism |
+| 9 | `AutomobileInterfacePolymorphismDemo` | Loose coupling via interfaces |
+|10 | `CustomerProductAddressDemo` | Object relationships |
+|11 | `CustomerBillingSystemUsingComposition` | Composition |
+|12 | `BankAccountOOPConsoleDemo` | Real-world OOP modeling |
+
+### 🔵 Advanced Level – Modern Java & Concurrency
+
+| # | Project Folder | Primary Focus |
+|---|----------------|---------------|
+|13 | `CollectionFrameWorkDemos` | Collections Framework |
+|14 | `LambdaExpressionAndFunctionalInterfaceDemo` | Lambdas & functional interfaces |
+|15 | `ThreadingDemo` | Multithreading & synchronization |
 
 ---
 
 ## 📌 Design Principles
 
 * One primary concept per project
-* Honest, descriptive project naming aligned with implemented concepts
+* Honest, descriptive project naming strictly aligned with implemented concepts
 * Clean, readable, and interview-oriented code
 * No frameworks — **pure Core Java**
 
@@ -91,6 +110,7 @@ Each folder represents an **independent Core Java module** and can be imported i
 
 ## 🧩 Skills Demonstrated
 
+* Ability to explain Core Java concepts through working code examples
 * Object-Oriented Analysis and Design
 * Interface-driven development
 * Effective use of Java language features
@@ -120,9 +140,8 @@ Each folder represents an **independent Core Java module** and can be imported i
 ---
 
 ## 👨‍💻 Author
-
-**Hitesh Mane**
-Java Backend Developer (Entry-Level)
+**Hitesh Mane**  
+Java Backend Developer  
 Pune, India
 📧 Email: [hiteshmane5hm@gmail.com](mailto:hiteshmane5hm@gmail.com)
 💻 GitHub: [https://github.com/CoreJavaPulse](https://github.com/CoreJavaPulse)
@@ -132,7 +151,6 @@ Pune, India
 ## ⭐ Final Note
 
 This repository emphasizes **conceptual clarity and correctness** over scale or framework usage.
-
 It is intended to serve as a **solid Core Java reference** for learning, revision, and technical discussions.
 
 ---
