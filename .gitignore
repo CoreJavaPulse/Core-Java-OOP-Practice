@@ -1,0 +1,26 @@
+# Eclipse
+.classpath
+.project
+.settings/
+bin/
+target/
+
+# Compiled Java classes
+*.class
+
+# Log files
+*.log
+logs/
+
+# OS generated
+.DS_Store
+Thumbs.db
+
+# Package files
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
