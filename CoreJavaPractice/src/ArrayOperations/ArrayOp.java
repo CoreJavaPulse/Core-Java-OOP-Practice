@@ -1,4 +1,5 @@
 package ArrayOperations;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class ArrayOp {
@@ -12,6 +13,7 @@ public class ArrayOp {
 		for(int i=0;i<n;i++)
 		{
 			arr[i] = sc.nextInt();
+			
 		}
 		return arr;
 	}
