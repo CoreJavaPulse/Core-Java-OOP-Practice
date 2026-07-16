@@ -1,0 +1,9 @@
+# Eclipse workspace
+.metadata/
+
+# Eclipse project
+**/bin/
+**/.settings/
+
+# Java
+*.class
